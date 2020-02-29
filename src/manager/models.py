@@ -2,14 +2,9 @@ from django.db import models
 
 class Brand(models.Model):
     """ブランド"""
-    created_at = models.DateTimeField(
-        '作成日時',
-        auto_now_add=True,
-    )
-    updated_at = models.DateTimeField(
-        '更新日時',
-        auto_now=True,
-    )
+    class Meta:
+        db_table = 'brand'
+
     code = models.CharField(
         'ブランドコード',
         max_length=64,
@@ -19,39 +14,34 @@ class Brand(models.Model):
         'ブランド名',
         max_length=64,
     )
+    created_at = models.DateTimeField(
+        '作成日時',
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        '更新日時',
+        auto_now=True,
+    )
 
     def __str__(self):
         return self.code
 
 class Product(models.Model):
     """品番"""
-    created_at = models.DateTimeField(
-        '作成日時',
-        auto_now_add=True,
-    )
-    updated_at = models.DateTimeField(
-        '更新日時',
-        auto_now=True,
-    )
+    class Meta:
+        db_table = 'product'
+        default_related_name = 'products'
+        unique_together = ('brand', 'code')
+
     brand = models.ForeignKey(
         Brand,
         verbose_name='ブランドコード',
-        related_name='products',
         on_delete=models.CASCADE,
     )
     code = models.CharField(
         '品番',
         max_length=64,
     )
-
-    class Meta:
-        unique_together = ('brand', 'code')
-
-    def __str__(self):
-        return self.code
-
-class Sku(models.Model):
-    """SKU"""
     created_at = models.DateTimeField(
         '作成日時',
         auto_now_add=True,
@@ -60,6 +50,17 @@ class Sku(models.Model):
         '更新日時',
         auto_now=True,
     )
+        
+    def __str__(self):
+        return self.code
+
+class Sku(models.Model):
+    """SKU"""
+    class Meta:
+        db_table = 'sku'
+        default_related_name = 'skus'
+        unique_together = ('brand', 'code')
+
     code = models.CharField(
         'SKU',
         max_length=64,
@@ -67,18 +68,21 @@ class Sku(models.Model):
     brand = models.ForeignKey(
         Brand,
         verbose_name='ブランドコード',
-        related_name='skus',
         on_delete=models.CASCADE,
     )
     product = models.ForeignKey(
         Product,
         verbose_name='品番',
-        related_name='skus',
         on_delete=models.CASCADE,
     )
-
-    class Meta:
-        unique_together = ('brand', 'code')
+    created_at = models.DateTimeField(
+        '作成日時',
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        '更新日時',
+        auto_now=True,
+    )
 
     def __str__(self):
         return self.code
