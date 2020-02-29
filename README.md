@@ -45,5 +45,5 @@ http://localhost:8000/admin/
 2. `# mysql -u root -pmysitepass mysite`
 3. `mysql> show tables;`
 
-※ホストマシンのGUIクライアントから接続することもできる。
+※ホストマシンのGUIクライアントから接続することもできる。  
 参考：[Dockerで構築したWordPress環境のMySQLにMySQL Workbenchから接続する - Qiita](https://qiita.com/dnrsm/items/1143517240d178b60d8e)
