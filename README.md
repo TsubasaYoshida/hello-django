@@ -32,7 +32,7 @@ http://localhost:8000/admin/
 1. `models.py` を修正する
 2. `$ docker exec -it mysite.web bash`
 3. `# python manage.py showmigrations`
-4. `# python manage.py migrate APPLICATION_NAME MIGRATION_NAME`
+4. `# python manage.py migrate APPLICATION_NAME MIGRATION_NAME`  
 => `MIGRATION_NAME` はその時点まで戻したいマイグレーション名を指定する。
 5. 不要なマイグレーションファイルを削除する
 6. `# python manage.py makemigrations`
