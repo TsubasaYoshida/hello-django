@@ -28,6 +28,7 @@ services:
     volumes:
       - mysite.db.volume:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
 
   web:
     build: ./web
