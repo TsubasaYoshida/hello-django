@@ -1,5 +1,9 @@
 # Hello-Django
 
+※コマンド例のプロンプト  
+- `$` => コンテナの外(ホストマシン)で実行している
+- `#` => コンテナの中で実行している
+
 ## コンテナの作成と起動
 `$ docker-compose up -d`
 
@@ -17,7 +21,6 @@ http://localhost:8000/admin/
 `$ docker exec -it mysite.db bash`
 
 ## アプリケーション作成
-`# ...` はコンテナの中でコマンド実行していることを指す。
 1. `$ docker exec -it mysite.web bash`
 2. `# python manage.py startapp manager`
 
