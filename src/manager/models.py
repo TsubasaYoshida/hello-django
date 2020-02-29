@@ -33,7 +33,7 @@ class Product(models.Model):
         '更新日時',
         auto_now=True,
     )
-    brand_code = models.ForeignKey(
+    brand = models.ForeignKey(
         Brand,
         verbose_name='ブランドコード',
         related_name='products',
@@ -42,8 +42,10 @@ class Product(models.Model):
     code = models.CharField(
         '品番',
         max_length=64,
-        unique=True,
     )
+
+    class Meta:
+        unique_together = ('brand', 'code')
 
     def __str__(self):
         return self.code
@@ -61,20 +63,22 @@ class Sku(models.Model):
     code = models.CharField(
         'SKU',
         max_length=64,
-        unique=True,
     )
-    brand_code = models.ForeignKey(
+    brand = models.ForeignKey(
         Brand,
         verbose_name='ブランドコード',
         related_name='skus',
         on_delete=models.CASCADE,
     )
-    product_code = models.ForeignKey(
+    product = models.ForeignKey(
         Product,
         verbose_name='品番',
         related_name='skus',
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        unique_together = ('brand', 'code')
 
     def __str__(self):
         return self.code
