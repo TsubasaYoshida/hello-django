@@ -26,6 +26,10 @@ class Brand(models.Model):
     def __str__(self):
         return self.code
 
+    @classmethod
+    def create(cls):
+        cls.objects.create(code="004", name="ナンバーフォー")
+
 class Product(models.Model):
     """品番"""
     class Meta:
